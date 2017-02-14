@@ -1,0 +1,200 @@
+<html>
+    <head>
+        <title>Search the city of chicago data portal</title>
+        <style>
+            h1{
+                margin-left: 6px;
+            }
+            p, h1 {
+                font-family: helvetica;
+                
+            }
+            p {
+                font-size:1.5em;
+                line-height:1.5em; 
+                margin-left: 24px;
+                
+            }
+            pre {
+                font-size: 2em;
+            }
+            div {
+                background-color: #b29774; 
+                border: 1px solid black; 
+                border-radius: 6px;
+                min-height:75px;
+                padding:15px;
+                text-align: center;
+            }
+            h4 {
+                font-size:1.5em;
+                line-height:1.5em; 
+                margin-left: 24px;
+                font-family: helvetica;
+                text-color: blue;
+            }
+            #results { 
+                background-color: #cebbad;
+            }
+            p, h4, h3 {
+                text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+            }
+            body {
+                background-color: #e6eaed;
+            }
+
+        </style>
+    </head>
+    <body>
+    <h1>Search crimes from 2001 to present.</h1>
+    
+    <!-- div for instructions and form -->
+    <div id="form">
+        <p>Search a year and type for crime records.
+            <br>
+        <input id="txtQuery" type="text" placeholder="Enter a year of crime."></input>
+        <p>Or, just choose a primary crime type.</p>
+        <select id = "crimeType">
+            <!--sigh-->
+            <option disabled selected value> -- select an option -- </option>
+            <option value="All">All</option>
+            <option value="Arson">Arson</option>
+            <option value="Battery">Battery</option>
+            <option value="Burglary">Burglary</option>
+            <option value="Criminal Damage">Criminal Damage</option>
+            <option value="Criminal Trespass">Criminal Trespass</option>
+            <option value="Deceptive practice">Deceptive practice</option>
+            <option value="Homicide">Homicide</option>
+            <option value="Interferance with public officer">Interferance with public officer</option>
+            <option value="Kidnapping">Kidnapping</option>
+            <option value="Liquor law violation">Liquor law violation</option>
+            <option value="Narcotics">Narcotics</option>
+            <option value="Involving children">Offense involving children</option>
+            <option value="Prostitution">Prostitution</option>
+            <option value="Public peace violation">Public peace violation</option>
+            <option value="Robbery">Robbery</option>
+            <option value="Sex offense">Sex offense</option>
+            <option value="Stalking">Stalking</option>
+            <option value="Theft">Theft</option>
+            <option value="Weapons violation">Weapons violation</option>
+            <option value="Other Offense">Other</option>
+            </select>
+        
+        <select id="numb">
+            <option disabled>Number Displayed</option>
+            <option>10</option>
+            <option>50</option>
+            <option>75</option>
+            <option>100</option>
+            <option>150</option>
+            <option>175</option>
+            <option>200</option>
+        </select>
+        
+        <button type="button" id="btnSearch" >Search</button>
+        
+    </div>
+    
+    
+    <!-- a div to store the results -->
+    <div id="results">
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        
+        $(function() 
+        {
+            
+            var baseUrl = "https://data.cityofchicago.org/resource/c4ep-ee5m.json";
+            
+            
+            $("#btnSearch").on("click", function() 
+            {
+            
+                  $("#results").html("");
+                  
+                  var searchTerm = $("#txtQuery").val();
+                  
+                  var mapsLink;
+                  
+                  
+                  
+                  
+                  
+                  var yearDate;
+                  var yearUrl;
+                  var finalUrl;
+                  var primeType;
+                  
+                  if ($("#txtQuery").val() != "")
+                  {
+                      yearDate = $("#txtQuery").val();
+                      yearUrl = baseUrl + "?year=" + yearDate;
+                      finalUrl = yearUrl;
+                      
+                  }
+                  
+                  if ($("#crimeType").val() != "All")
+                  {
+                      primeType = $("#crimeType").val();
+                      if (yearDate != null)
+                      {
+                          finalUrl = yearUrl + "&primary_type=" + primeType;
+                      } else 
+                      {
+                          finalUrl = baseUrl + "?primary_type=" + primeType;
+                      }
+                  }
+                  
+                  if($("#crimeType").val() == "All" &&  $("#txtQuery").val() == "")
+                  {
+                      finalUrl = baseUrl;
+                  } else if ($("#crimeType").val() == "All" && $("#txtQuery").val()!= "")
+                  {
+                      finalUrl = baseUrl + "?year=" + $("#txtQuery").val();
+                  }
+                  
+                  
+                  
+                  $.getJSON(finalUrl)
+                    .done(function(data)
+                    {
+                        
+                        data.length = $("#numb").val();
+                        
+                       console.log(finalUrl);
+                       
+                       $.each(data, function(index, value)
+                       {
+                           $("#results").append("<h2>Case Number: "
+                           + value.case_number
+                           +"</h2>"
+                           + "<br>"
+                           + "Date: " + value.date 
+                           + "<br>Location Address: "+ value.block 
+                           + "<br>Description: "
+                           + value.description
+                           + "<br>Year: "
+                           + value.year
+                           + "<h4>Prime Type: " + value.primary_type +"<hr>");
+                           
+                       });
+                    })
+                    .fail(function(err)
+                    {
+                             $("#results").append(err); 
+                    });
+                       
+            
+            });
+            
+            
+        });
+        
+        
+//this is the link to the city of chicago page itself: https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present-Map/c4ep-ee5m    
+    
+    </script>
+    </body>
+</html>
