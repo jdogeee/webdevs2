@@ -27,27 +27,31 @@
         
         
         var url = "https://data.cityofchicago.org/resource/rp42-fxjt.json";
-        $.ajax({
-          url: url,
-          method: 'GET',
-          data: { color: "BLK" , make: "FORD"}
-        }).done(function(data) {
+        $.ajax 
+        ({
+            url: url,
+            method: 'GET',
+            data: { color: "BLK" , make: "FORD"}
+        }).done(function(data) 
+        {
           
           var clone;
           
-          $.each(data, function (i,v) {
-            clone = $(".towedVehicle").clone();
-            clone.find(".plate").text(v.plate)
-            clone.find(".color").text(v.color);
-            clone.find(".tow_date").text(v.tow_date);
-            clone.find(".tow_facility_phone").text(v.tow_facility_phone);
-            clone.find(".tow_date").text(v.tow_date);
-            clone.find(".towed_to_address").text(v.towed_to_address);
-            clone.find(".mapLink").attr("href", "https://www.google.com/maps/place/" + v.towed_to_address);
+          $.each(data, function (i,v) 
+          {
+              clone = $(".towedVehicle").clone();
+              clone.find(".plate").text(v.plate);
+              clone.find(".color").text(v.color);
+              clone.find(".tow_date").text(v.tow_date);
+              clone.find(".tow_facility_phone").text(v.tow_facility_phone);
+              clone.find(".tow_date").text(v.tow_date);
+              clone.find(".towed_to_address").text(v.towed_to_address);
+              clone.find(".mapLink").attr("href", "https://www.google.com/maps/place/" + v.towed_to_address);
             $("#results").append("clone");
-          })
+          });
 
-        }).fail(function(err) {
+        }).fail(function(err)
+        {
           throw err;
         });
         
