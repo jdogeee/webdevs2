@@ -4,7 +4,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
 
-      /* Load the Visualization API and the corechart package.
+      //Load the Visualization API and the corechart package.
       google.charts.load('current', {'packages':['corechart']});
 
       // Set a callback to run when the Google Visualization API is loaded.
@@ -20,24 +20,27 @@
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-          ['Pepperoni', 1],
-          ['Sausage', 2,]
-          ['Cheese', 1]
+          ['Pepperoni', 3],
+          ['Sausage', 2,],
+          ['Cheese', 1],
+          ['Other', 0]
         ]);
 
         // Set chart options
         var options = {'title':'How Much Pizza I Ate Last Night',
+                      'legend':'left',
+                      'is3D':true,
                        'width':500,
-                       'height':400};
+                       'height':420};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        chart.draw(data, options);*/
+        chart.draw(data, options);
       }
     </script>
   </head>
 
-  <body>
+  <body bgcolor = "#dcdfe5">
     <!--Div that will hold the pie chart-->
     <div id="chart_div"></div>
   </body>
