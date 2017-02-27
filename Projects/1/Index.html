@@ -8,30 +8,35 @@
         </style>
     </head>
     <body>
-        <div id="form">
+        <div id="busRoutes">
             <h1>What time does my bus arrive?</h1>
             <h3>Choose which way you are heading.</h3>
             
             <select id="busChoice">
                 <option disabled selected value> -- select a route -- </option>
-                <option value="Addison">Addison</option>
-                <option value="Western">Western</option>
+                <option value="152">Addison</option>
+                <option value="49">Western</option>
+                <option value="X49">Western Express</option>
             </select>
-            
+        </div>
+        
+        <div id="addisonAppear">
             <select id="addDirect">
                 <option disabled selected value> -- select a direction -- </option>
                 <option value="Westbound">Westbound</option>
                 <option value="Eastbound">Eastbound</option>
             </select>
-            
+        </div>
+        <div id="westernAppear">
             <select id="westDirect">
                 <option disabled selected value> -- select a direction -- </option>
                 <option value="Northbound">Northbound</option>
                 <option value="Southbound">Southbound</option>
             </select>
+            <button type="button" id="btnSearch" >Search</button>
         </div>
         
-        <div id = "results"></div>
+        <div id ="results"></div>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
         </script>
@@ -40,7 +45,18 @@
             //jQuery goes here
             $(function()
             {
-                //
+                var baseUrl = "http://www.ctabustracker.com/bustime/api/v2/gettime?key=vKmuViPhs6L5tWwKRB3Bq3j86&format=json";
+                
+                $("#addisonAppear").hide();
+                $("#westernAppear").hide();
+                
+                $("#busRoutes").on("click", function(){
+                    var busCh = $("#busRoutes").val();
+                    
+                    if (busCh == ""){
+                        //
+                    }
+                });
                 
             
                 
