@@ -14,12 +14,12 @@
             
             <select id="busChoice">
                 <option disabled selected value> -- select a route -- </option>
-                <option value="152">Addison</option>
-                <option value="49">Western</option>
-                <option value="X49">Western Express</option>
+                <option value="152">Addison (152)</option>
+                <option value="49">Western (49)</option>
+                <option value="X49">Western Express (X49)</option>
             </select>
         </div>
-        
+        <!--
         <div id="addisonAppear">
             <select id="addDirect">
                 <option disabled selected value> -- select a direction -- </option>
@@ -34,7 +34,7 @@
                 <option value="Southbound">Southbound</option>
             </select>
             <button type="button" id="btnSearch" >Search</button>
-        </div>
+        </div> -->
         
         <div id ="results"></div>
         
@@ -47,20 +47,24 @@
             {
                 var baseUrl = "http://www.ctabustracker.com/bustime/api/v2/gettime?key=vKmuViPhs6L5tWwKRB3Bq3j86&format=json";
                 
-                $("#addisonAppear").hide();
-                $("#westernAppear").hide();
+                var apiEndpoint = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
                 
-                $("#busRoutes").on("click", function(){
-                    var busCh = $("#busRoutes").val();
+                $.ajax({
+                    url: baseUrl,
+                    dataType: "json",
+                    method: 'GET',
+                    data: {"apiEndpoint": apiEndpoint,
+                        "key": "vKmuViPhs6L5tWwKRB3Bq3j86",
+                        "format": "json"}
+                }).done(function(data){
+                    console.log(data);
                     
-                    if (busCh == ""){
-                        //
-                    }
+                    $.each(data["bustime-response"]["routes"], function(i,v) {
+                  $("body").append("Route #" + v.rt + ", " + v.rtnm + "<br>");
+                        
+                    });
+                    
                 });
-                
-            
-                
-                
                 
                 
             });
