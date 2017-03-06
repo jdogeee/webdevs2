@@ -45,9 +45,9 @@
             //jQuery goes here
             $(function()
             {
-                var baseUrl = "http://www.ctabustracker.com/bustime/api/v2/gettime?key=vKmuViPhs6L5tWwKRB3Bq3j86&format=json";
+                var baseUrl = "http://www.ctabustracker.com/bustime/api/v2/getpredictions";
                 
-                var apiEndpoint = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+                var apiEndpoint = "https://polar-garden-75406.herokuapp.com/apiPassThru.php"; 
                 
                 $.ajax({
                     url: baseUrl,
@@ -60,7 +60,7 @@
                     console.log(data);
                     
                     $.each(data["bustime-response"]["routes"], function(i,v) {
-                  $("body").append("Route #" + v.rt + ", " + v.rtnm + "<br>");
+                  $("body").append("#results" + v.rt + ", " + v.rtnm + "<br>");
                         
                     });
                     
