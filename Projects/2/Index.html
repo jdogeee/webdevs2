@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8">
         <title>Cta Bus Tracker</title>
         <style type="text/css">
-            h1, h3 {font-family: helvetica;}
-            h1{color: #1662dd;}
+            h1, h3 {
+                font-family: helvetica;
+            }
+            h1{
+                color: #1662dd;
+            }
+            body {
+                background-color: seashell;
+            }
         </style>
+        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <link rel="manifest" href="./manifest.json">
     </head>
     <body>
-        <div id="busRoutes">
+        <div id="form">
             <h1>What time does my bus arrive?</h1>
             <h3>Choose which way you are heading.</h3>
-            
+        </div>
+        
+        <div id="busRoutes">
             <select id="busChoice">
                 <option disabled selected value> -- select a route -- </option>
                 <option value="152">Addison (152)</option>
