@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Adopt-a-dog!</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+        <style>
+            h1 {
+                font-family: impact, Charcoal, sans-serif;
+                color: #8A2BE2;
+            }
+            body {
+                background: #dce2dc;
+            }
+            h3 {
+                font-family: "Arial Black", Gadget, sans-serif;
+            }
+            #home {
+                width: 100%;
+                background-color: #d9d9db;
+                /*
+                https://www.w3schools.com/cssref/css_colors.asp
+                https://www.w3schools.com/cssref/css_websafe_fonts.asp
+                https://www.w3schools.com/css/css_text.asp*/
+            }
+            footer {
+                background-color: #c0c4c0;
+                color: black;
+                font-family: Courier;
+                text-align: center;
+            }
+            header {
+                background-color: transparent;
+                text-align: left;
+            }
+            div {
+                text-align: justify;
+            }
+            img {
+                width: 25%;
+                height: 25%;
+                
+            }
+            table, th, a href {
+                background: transparent;
+                color: #8A2BE2;
+            }
+            p {
+                font-family: Courier;
+                color: Black;
+            }
+            #linkBar {
+                background-color: lightgrey;
+            }
+            h4 {
+                color: #393b3d;
+                font-family: impact, Charcoal, sans-serif;
+                font-size: 150%;
+            }
+            h6 {
+                font-size: 80%;
+                font-style: italic;
+            }
+        </style>
+    
+    </head>
+    <body>
+        <div id="homeSearch">
+            <header>
+                <h1>Welcome to Adopt-a-boston</h1>
+            </header>
+            <img src="./adopt_a_boston_1.png" alt="Logo">
+            
+            <table id = "linkBar" style="width: 100%">
+                <th><a href="https://preview.c9users.io/jdvergara/webdevs2/Projects/3/index.html">Home</a></th>
+                <th><a href="https://www.petfinder.com/">Check out Petfinder!</a></th>
+                <th><a href="#">Filler</a></th>
+            </table>
+            
+            <p>Find a shelter with a Boston Terrier!</p>
+            
+            <table style="width: 25%">
+                <tr>
+                    <th>Sex: (M/F)</th>
+                    <th>Age:</th>
+                    <th>Zip:</th>
+                </tr>
+                <tr>
+                    <th><input id="boyOrGirl" type="text" name="sex"></th>
+                    <!--<th><input id="dogAge" type="text" name="age"></th> -->
+                    <th>
+                        <select id ="ageString">
+                            <option disabled selected value> Age </option>
+                            <option value="baby">Baby</option>
+                            <option value="young">Young</option>
+                            <option value="adult">Adult</option>
+                            <option value="senior">Senior</option>
+                        </select>
+                    </th>
+                    <th><input id="zipCode" type="text" name="zip"></th>
+                    <th><input id="twoSearch" type="submit" value="Submit"></th>
+                </tr>
+            </table>
+            
+            <p>Or, search by pet ID:</p>
+            
+            <input id="petID" type="number" name="petID">
+            <input type="submit" value="Submit"><br><br>
+            
+            <h4>This app was made with Petfinder.</h4>
+            <p>From the petfinder website:</p>
+            <h6>"Petfinder is an online, searchable database of animals who need homes. It is also a directory of nearly 14,000 animal shelters and adoption organizations across the U.S., Canada and Mexico. Organizations maintain their own home pages and available-pet databases."</h6>
+            
+            <footer>This is a footer :^)</footer>
+        </div>
+        
+        
+        
+        <div id="dogResults">
+            <h1>Choose a Boston!</h1>
+            <h3> Some extra text</h3>
+            <hr>
+        </div>
+        
+        <div id="viewDog"></div>
+        
+        
+        
+        <script>
+            completeBase = "http://api.petfinder.com/auth.getToken?key=95e725b73febf9112fad1e2d5e7b79e9&animal=dog&breed=bostonterrier";
+            
+           $(document).ready(function(){
+               //$("#homeSearch").hide();
+               $("#dogResults").hide();
+               $("#viewDog").hide();
+               
+               
+               //below, use shelter.find
+               
+               $("#twoSearch").on("click", function(){
+                   console.log("Hello, search!");
+                   
+                   $("#homeSearch").hide();
+                   $("#dogResults").show();
+                   $("#viewDog").hide();
+                   
+                   dogG = $("#boyOrGirl").val();
+                   dogAges = $("#ageString").val();
+                   zipLoc = $("#zipCode").val();
+                   
+                   key = "95e725b73febf9112fad1e2d5e7b79e9";
+                   
+                   //searchZip = $("#zipCode").val();
+                   
+                   if (dogG != "" && dogAges != "" && zipLoc != ""){
+                       var withGender = "&sex=" + dogG;
+                       var withAge = "&age=" + dogAges;
+                       var zipLocation = "&location=" + zipLoc;
+                       
+                       finalURL = completeBase + withGender + withAge + zipLocation + "&format=json";
+                   }
+                   else {
+                       finalURL = completeBase + "&format=json"
+                   }
+                   
+                   
+                   $.getJSON(finalURL, function(index, value){
+                       console.log(finalURL);
+                       
+                       $("#dogResults").append("<p>DID IT WORK YET?</p>" + value.shelter.find(key, zipLoc));
+                       
+                   });
+                   
+                   
+               });
+               
+           });
+        </script>
+        
+    </body>
+</html>

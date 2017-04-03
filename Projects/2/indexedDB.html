@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DB Web</title>
+    <style>
+      p {
+        color: black;
+        font-family: Arial;
+      }
+    </style>
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  </head>
+  
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+                mdl-layout--fixed-tabs">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">City of Chicago Crime Data</span>
+        </div>
+        
+        <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+          <a href="#fixed-tab-1" class="mdl-layout__tab is-active">ONE</a>
+          <a href="#fixed-tab-2" class="mdl-layout__tab">TWO</a>
+          <a href="#fixed-tab-3" class="mdl-layout__tab">THREE</a>
+        </div>
+      </header>
+      
+      <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">City of Chicago Crime Data</span>
+      </div>
+      
+      <main class="mdl-layout__content">
+        <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+          <div class="page-content1">
+            <p>This is the first page :^)</p>
+          </div>
+        </section>
+          
+          <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+            <div class="page-content2">
+              <p>This is the 2nd page</p>
+            </div>
+          </section>
+            
+            <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+              <div class="page-content3">
+                <br><p>This is the 3rd page</p>
+              </div>
+            </section>
+              
+      </main>
+    </div>
+    
+    <script>
+      var URL = "https://data.cityofchicago.org/resource/c4ep-ee5m.json";
+      var withCrimeType;
+      var resultNum;
+      console.log(URL);
+      
+      //on click
+      
+    </script>
+    
+  </body>
+</html>
